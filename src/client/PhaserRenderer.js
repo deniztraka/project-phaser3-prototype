@@ -4,11 +4,12 @@
 
 //import isNode from 'detect-node'
 //if (!isNode) {                                                                                                                                                                                        
-    //require('phaser');
-    //var Renderer = require('phaser/dist/phaser');
+//require('phaser');
+//var Renderer = require('phaser/dist/phaser');
 //}
 
-import Renderer from 'lance/render/Renderer';
+import { Renderer } from 'lance-gg';
+
 /**
  * Phaser Renderer
  */
@@ -16,7 +17,7 @@ import Renderer from 'lance/render/Renderer';
 export default class PhaserRenderer extends Renderer {
 
     //get ASSETPATHS() {
-        //return {};
+    //return {};
     //}
 
     constructor(gameEngine, clientEngine) {
@@ -28,7 +29,7 @@ export default class PhaserRenderer extends Renderer {
     }
 
     //start(){
-        //this.game = new Phaser.Game(this.config);
+    //this.game = new Phaser.Game(this.config);
     //}
 
     init() {
@@ -46,7 +47,7 @@ export default class PhaserRenderer extends Renderer {
             }
         };
         */
-        
+
         return p; // eslint-disable-line new-cap
     }
 
@@ -55,14 +56,14 @@ export default class PhaserRenderer extends Renderer {
     }
 
     //tick(t, dt) {
-        //super.draw(t, dt);
+    //super.draw(t, dt);
     //}
 
     //addObject(obj) {
-        //super.addObject(obj);
+    //super.addObject(obj);
     //}
 
     //removeObject(obj) {
-        //super.removeObject(obj);
+    //super.removeObject(obj);
     //}
 }

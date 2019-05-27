@@ -1,8 +1,8 @@
 'use strict';
 
 const nameGenerator = require('./NameGenerator');
-
-import ServerEngine from 'lance/ServerEngine';
+import { ServerEngine } from 'lance-gg';
+//import ServerEngine from 'lance/ServerEngine';
 import PlayerAvatar from '../common/PlayerAvatar';
 const NUM_BOTS = 3;
 
@@ -11,7 +11,7 @@ export default class MyServerEngine extends ServerEngine {
     constructor(io, gameEngine, inputOptions) {
         super(io, gameEngine, inputOptions);
         this.scoreData = {};
-        
+
     }
 
     start() {
@@ -64,8 +64,8 @@ export default class MyServerEngine extends ServerEngine {
         super.onPlayerDisconnected(socketId, playerId);
 
         // iterate through all objects, delete those that are associated with the player (ship and missiles)
-        let playerObjects = this.gameEngine.world.queryObjects({ playerId: playerId});
-        playerObjects.forEach( obj => {
+        let playerObjects = this.gameEngine.world.queryObjects({ playerId: playerId });
+        playerObjects.forEach(obj => {
             this.gameEngine.removeObjectFromWorld(obj.id);
             // remove score associated with this ship
             delete this.scoreData[obj.id];

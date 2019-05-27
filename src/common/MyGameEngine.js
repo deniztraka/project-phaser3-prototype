@@ -1,6 +1,6 @@
 'use strict';
 
-import TwoVector from 'lance/serialize/TwoVector';
+import { TwoVector } from 'lance-gg';
 
 import Ship from './Ship';
 import Missile from './Missile';
@@ -11,8 +11,10 @@ const HEIGHT = 400;
 const PADDLE_WIDTH = 10;
 const PADDLE_HEIGHT = 50;
 
-import GameEngine from 'lance/GameEngine';
-import SimplePhysicsEngine from 'lance/physics/SimplePhysicsEngine';
+import { SimplePhysicsEngine } from 'lance-gg';
+import { GameEngine } from 'lance-gg';
+// import GameEngine from 'lance/GameEngine';
+// import SimplePhysicsEngine from 'lance/physics/SimplePhysicsEngine';
 //import PlayerAvatar from './PlayerAvatar';
 
 export default class MyGameEngine extends GameEngine {
@@ -34,7 +36,7 @@ export default class MyGameEngine extends GameEngine {
         serializer.registerClass(Missile);
     }
 
-    initWorld(){
+    initWorld() {
         super.initWorld({
             worldWrap: true,
             width: 3000,
@@ -109,23 +111,23 @@ export default class MyGameEngine extends GameEngine {
         console.log("init game!");
     }
 
-    addship(playerId){
-        let ship = new Ship(this, null, {position: new TwoVector(5, 5)});
+    addship(playerId) {
+        let ship = new Ship(this, null, { position: new TwoVector(5, 5) });
         ship.playerId = playerId;
         this.addObjectToWorld(ship);
         //console.log(`ship added: ${ship.toString()}`);
         return ship;
     }
 
-    makeShip(playerId){
-        let newShipX = Math.floor(Math.random()*(this.worldSettings.width-200)) + 200;
-        let newShipY = Math.floor(Math.random()*(this.worldSettings.height-200)) + 200;
+    makeShip(playerId) {
+        let newShipX = Math.floor(Math.random() * (this.worldSettings.width - 200)) + 200;
+        let newShipY = Math.floor(Math.random() * (this.worldSettings.height - 200)) + 200;
         let ship = new Ship(this, null, {
             position: new TwoVector(newShipX, newShipY)
         });
 
         //let ship = new Ship(this, null, {position: new TwoVector(200, 200)});
-        
+
         ship.playerId = playerId;
         this.addObjectToWorld(ship);
         //console.log(`ship added: ${ship.toString()}`);
@@ -178,6 +180,5 @@ export default class MyGameEngine extends GameEngine {
                 ship.showThrust--;
         });
     }
-    
-}
 
+}

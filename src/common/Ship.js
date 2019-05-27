@@ -2,14 +2,16 @@
     Information:
 */
 
-import Serializer from 'lance/serialize/Serializer';
-import DynamicObject from 'lance/serialize/DynamicObject';
+//import Serializer from 'lance/serialize/Serializer';
+import { Serializer } from 'lance-gg';
+import { DynamicObject } from 'lance-gg';
+//import DynamicObject from 'lance/serialize/DynamicObject';
 import Renderer from '../client/MyRenderer';
 import ShipActor from '../client/ShipActor';
 
 export default class Ship extends DynamicObject {
 
-    constructor(gameEngine, options, props){
+    constructor(gameEngine, options, props) {
         super(gameEngine, options, props);
         this.showThrust = 0;
         this.isBot = false;
@@ -17,7 +19,7 @@ export default class Ship extends DynamicObject {
     }
 
     get maxSpeed() { return 3.0; }
-    
+
     onAddToWorld(gameEngine) {
         let renderer = Renderer.getInstance();
         if (renderer) {
@@ -39,11 +41,11 @@ export default class Ship extends DynamicObject {
             this.fireLoop.destroy();
         }
 
-        if (this.onPreStep){
+        if (this.onPreStep) {
             this.gameEngine.removeListener('preStep', this.onPreStep);
             this.onPreStep = null;
         }
-        
+
         let renderer = Renderer.getInstance();
         if (renderer) {
             if (gameEngine.isOwnedByPlayer(this)) {
@@ -55,7 +57,7 @@ export default class Ship extends DynamicObject {
             if (sprite) {
                 if (sprite.actor) {
                     // removal "takes time"
-                    sprite.actor.destroy().then(()=>{
+                    sprite.actor.destroy().then(() => {
                         //console.log('deleted sprite actor');
                         delete renderer.sprites[this.id];
                     });
@@ -87,7 +89,7 @@ export default class Ship extends DynamicObject {
     }
 
     destroy() {
-        
+
     }
 
     attachAI() {
@@ -140,7 +142,7 @@ export default class Ship extends DynamicObject {
 
             let newVX = this.shortestVector(this.position.x, this.target.position.x, this.gameEngine.worldSettings.width);
             let newVY = this.shortestVector(this.position.y, this.target.position.y, this.gameEngine.worldSettings.height);
-            let angleToTarget = Math.atan2(newVX, newVY)/Math.PI* 180;
+            let angleToTarget = Math.atan2(newVX, newVY) / Math.PI * 180;
             angleToTarget *= -1;
             angleToTarget += 90; // game uses zero angle on the right, clockwise
             if (angleToTarget < 0) angleToTarget += 360;

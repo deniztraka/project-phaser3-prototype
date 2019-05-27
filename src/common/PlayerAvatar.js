@@ -1,6 +1,7 @@
 'use strict';
 
-import DynamicObject from 'lance/serialize/DynamicObject';
+import { DynamicObject } from 'lance-gg';
+//import DynamicObject from 'lance/serialize/DynamicObject';
 
 export default class PlayerAvatar extends DynamicObject {
 

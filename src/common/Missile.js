@@ -1,11 +1,13 @@
-import Serializer from 'lance/serialize/Serializer';
-import DynamicObject from 'lance/serialize/DynamicObject';
+//import Serializer from 'lance/serialize/Serializer';
+import { Serializer } from 'lance-gg';
+import { DynamicObject } from 'lance-gg';
+//import DynamicObject from 'lance/serialize/DynamicObject';
 import Renderer from '../client/MyRenderer';
 
 
 export default class Missile extends DynamicObject {
 
-    constructor(gameEngine, options, props){
+    constructor(gameEngine, options, props) {
         super(gameEngine, options, props);
     }
 
@@ -22,7 +24,7 @@ export default class Missile extends DynamicObject {
     onAddToWorld(gameEngine) {
         let renderer = Renderer.getInstance();
         if (renderer) {
-            let scene = renderer.getScene();//get current index scenes
+            let scene = renderer.getScene(); //get current index scenes
             let sprite = scene.add.image(10, 10, 'shot');
             renderer.sprites[this.id] = sprite; //assign id for render sprites array
             sprite.x = this.position.x;

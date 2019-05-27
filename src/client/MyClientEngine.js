@@ -3,8 +3,9 @@
 */
 
 
-import ClientEngine from 'lance-gg/ClientEngine';
-import KeyboardControls from 'lance-gg/controls/KeyboardControls';
+import { ClientEngine } from 'lance-gg';
+
+import { KeyboardControls } from 'lance-gg';
 import MyRenderer from '../client/MyRenderer';
 import Utils from '../common/Utils';
 
@@ -15,7 +16,7 @@ export default class MyClientEngine extends ClientEngine {
     constructor(gameEngine, options) {
         super(gameEngine, options, MyRenderer);
     }
-    
+
     start() {
         super.start();
         //console.log("client engine!");
@@ -34,14 +35,14 @@ export default class MyClientEngine extends ClientEngine {
             //console.log("Renderer Ready!");
             // click event for "try again" button
             document.querySelector('#tryAgain').addEventListener('click', () => {
-                if (Utils.isTouchDevice()){
+                if (Utils.isTouchDevice()) {
                     this.renderer.enableFullScreen();
                 }
                 this.socket.emit('requestRestart');
             });
-            
+
             document.querySelector('#joinGame').addEventListener('click', (clickEvent) => {
-                if (Utils.isTouchDevice()){
+                if (Utils.isTouchDevice()) {
                     this.renderer.enableFullScreen();
                 }
                 console.log(clickEvent.currentTarget)
@@ -49,13 +50,13 @@ export default class MyClientEngine extends ClientEngine {
                 this.socket.emit('requestRestart');
                 //console.log("join game?");
             });
-            
+
             document.querySelector('#reconnect').addEventListener('click', () => {
                 window.location.reload();
             });
-            
+
             //  Game input
-            if (Utils.isTouchDevice()){
+            if (Utils.isTouchDevice()) {
                 this.controls = new MobileControls(this.renderer);
             } else {
                 this.controls = new KeyboardControls(this.renderer);
@@ -64,7 +65,7 @@ export default class MyClientEngine extends ClientEngine {
             this.controls = new KeyboardControls(this);
             this.controls.bindKey('left', 'left', { repeat: true });
             this.controls.bindKey('right', 'right', { repeat: true });
-            this.controls.bindKey('up', 'up', { repeat: true } );
+            this.controls.bindKey('up', 'up', { repeat: true });
             this.controls.bindKey('space', 'space');
 
             this.controls.on('fire', () => {
@@ -73,8 +74,8 @@ export default class MyClientEngine extends ClientEngine {
 
         });
         //play sound when user fire missle
-        this.gameEngine.on('fireMissile', () => { 
-            if(this.renderer.scene){
+        this.gameEngine.on('fireMissile', () => {
+            if (this.renderer.scene) {
                 //console.log(this.renderer.scene);
                 this.renderer.scene.soundFX_lasergun.play();
             }
@@ -83,7 +84,7 @@ export default class MyClientEngine extends ClientEngine {
         this.gameEngine.on('missileHit', () => {
             // don't play explosion sound if the player is not in game
             if (this.renderer.playerShip) {
-                if(this.renderer.scene){
+                if (this.renderer.scene) {
                     this.renderer.scene.soundFX_projectilehit.play();
                 }
             }
